@@ -11,7 +11,7 @@ caratCost <- function(in_carat){
 }
 shinyServer(
   function(input, output) {
-    output$inputValue <- renderPrint({input$carat})
-    output$prediction <- renderPrint({caratCost(input$carat)})
+    output$inputValue <- renderText({input$carat})
+    output$prediction <- renderText({caratCost(input$carat)})
   }
 )
