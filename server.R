@@ -1,40 +1,17 @@
 library(shiny)
-diabetesRisk <- function(glucose) glucose / 200
+library(ggplot2)
+reg<-lm(price~carat, data = diamonds)
+caratCost <- function(in_carat){
+  l_output<-predict(reg, data.frame(carat = c(in_carat))) 
+  if (l_output < 0)
+  {
+    l_output<-500
+  }
+  sprintf("$%.2f", l_output)
+}
 shinyServer(
   function(input, output) {
-    output$inputValue <- renderPrint({input$glucose})
-    output$prediction <- renderPrint({diabetesRisk(input$glucose)})
+    output$inputValue <- renderPrint({input$carat})
+    output$prediction <- renderPrint({caratCost(input$carat)})
   }
 )
-
-# library(shiny)
-# 
-# # Define server logic for slider examples
-# shinyServer(function(input, output) {
-#   
-#   # Reactive expression to compose a data frame containing all of
-#   # the values
-#   sliderValues <- reactive({
-#     
-#     # Compose data frame
-#     data.frame(
-#       Name = c("Integer", 
-#                "Decimal",
-#                "Range",
-#                "Custom Format",
-#                "Animation"),
-#       Value = as.character(c(input$integer, 
-#                              input$decimal,
-#                              paste(input$range, collapse=' '),
-#                              input$format,
-#                              input$animation)), 
-#       stringsAsFactors=FALSE)
-#   }) 
-#   
-#   # Show the values using an HTML table
-#   output$values <- renderTable({
-#     sliderValues()
-#   })
-# })
-
-
