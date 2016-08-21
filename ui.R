@@ -1,6 +1,6 @@
 shinyUI(
   fluidPage(
-    titlePanel("Diamond cost calculator (the the most carats for your dollar!!)"),
+    titlePanel("Diamond cost calculator (the most carats for your dollar!!)"),
     sidebarPanel(
       numericInput('carat', 'Carats in quarter carat increments', .25, min = .25, max = 6, step = .25),
       submitButton('Submit')
